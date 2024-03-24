@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { v4 } from "uuid";
-import Cookies from "js-cookie";
 import TodoItem from "../TodoItem";
 
 import "./index.css";
@@ -11,26 +10,8 @@ class TodosTwist extends Component {
     textValue: "",
   };
 
-  componentDidMount() {
-    this.getTodosList();
-  }
-
-  getTodosList = () => {
-    const todos = Cookies.get("todosList");
-    console.log(todos);
-    const parsedTodos = JSON.parse(todos);
-    this.setState({ todosList: parsedTodos });
-  };
-
   inputText = (event) => {
     this.setState({ textValue: event.target.value });
-  };
-
-  saveTodoTwists = () => {
-    const { todosList } = this.state;
-    const values = JSON.stringify(todosList);
-
-    Cookies.set("todosList", values, { expires: 30 });
   };
 
   addGoalText = () => {
@@ -136,13 +117,6 @@ class TodosTwist extends Component {
             ))}
           </ul>
         </div>
-        <button
-          type="button"
-          className="save-button"
-          onClick={this.saveTodoTwists}
-        >
-          Save
-        </button>
       </div>
     );
   }
